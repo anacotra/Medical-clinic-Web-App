@@ -1,0 +1,181 @@
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body style="background-color: rgb(240, 227, 243); padding-bottom: 5%;">
+  <!--NAVIGACIJA-->
+  <header>
+    <nav class="navbar navbar-dark navbar-expand-sm fixed-top" style="background-color: rgba(141, 67, 158, 0.849); font-weight: bold;">
+      <div class="container-fluid">
+        <div>
+          <img src="../../assets/slike/spektar.jpg" style="width: 30px; height: 30px;">&nbsp;&nbsp;
+          <span class="navbar-brand  mb-8 h1" style="color: rgb(0, 0, 0); font-size: 25px;">SPEKTAR</span>
+        </div>
+          <form class="d-flex">
+            <button class="btn btn-dark me-2" type="button" data-bs-toggle="modal" data-bs-target="#loginModal">Prijavi se</button>
+            <button class="btn btn-sm btn-light me-2" type="button" [routerLink]="'/registerPac'">Registruj se</button>
+          </form>  
+      </div>
+    </nav>
+  </header>
+
+  <!--SLIKE, TEKST I TABELA-->
+  <div class="container pt-5 my-5 ">
+    <div class="row container-md">
+      <h2>Lekarska ordinacija</h2>
+      <div class="col-sm-6" style="padding-top: 6%;">
+        <div id="carouselInterval" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+              <div class="carousel-item active" data-bs-interval="5000">
+                <img src="../../assets/slike/ordinacija4.jpg" class="d-block w-100" alt="...">
+              </div>
+              <div class="carousel-item" data-bs-interval="5000">
+                <img src="../../assets/slike/ordinacija2.jpg" class="d-block w-100" alt="...">
+              </div>
+              <div class="carousel-item" data-bs-interval="5000">
+                <img src="../../assets/slike/ordinacija3.jpg" class="d-block w-100" alt="...">
+              </div>
+              <div class="carousel-item" data-bs-interval="5000">
+                <img src="../../assets/slike/ordinacija1.jpg" class="d-block w-100" alt="...">
+              </div>
+              <div class="carousel-item" data-bs-interval="5000">
+                <img src="../../assets/slike/ordinacija5.jpg" class="d-block w-100" alt="...">
+              </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselInterval" data-bs-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselInterval" data-bs-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+      </div>
+      <div class="col-sm-6" style=" padding-left: 5%; padding-top: 5%;">
+        <p>
+          <b>Možete obaviti sve vrste dijagnostičkih pregleda 
+          pomoću savremenih Simensovih aparata:</b>
+          <ul>
+            <li>
+              ultrazvučni pregled- neinvazivna, efikasna i brza metoda pregleda unutrašnjih organa; 
+            </li>
+            <li>
+              rendgen- snimanje različitih delova tela najsavremenijim RTG aparatom koji daje digitalne snimke visoke 
+              rezolucije uz minimalnu dozu zračenja; 
+            </li>
+            <li>
+              mamografiju- rendgensku tehniku za rano otkrivanje oboljenja dojke; 
+            </li>
+            <li>
+              ultrazvučni pregled- bezopasna metoda pregleda unutrašnjih organa;
+            </li>
+            <li>
+              multislajsni skener- brza, neinvazivna i precizna metoda 
+              koja se koristi u cilju ranog otkrivanja bolesti kao i praćenja toka različitih 
+              stanja.;
+            </li>
+            <li>
+              magnetnu rezonancu- neivanzivan i precizan pregled koji daje konkretnu 
+              sliku o stanju pojedinih organa, organskih sistema kao i čitavog organizma.
+            </li>
+          </ul>  
+      </div>
+    </div>
+  </div>
+  <br/>
+  <div class="container">
+    <table id="tabelaLekara" class="table table-hover table-striped table-sm">
+      <thead>
+        <tr>
+          <td>
+            Pretraga lekara:
+          </td>
+          <td>
+            <input type="text" placeholder="Pretaži imena..." [(ngModel)]="pretragaIme">&nbsp;
+          </td>
+          <td>
+            <input type="text" placeholder="Pretaži prezimena..." [(ngModel)]="pretragaPrezime">&nbsp;
+          </td>
+          <td>
+            <input type="text" placeholder="Pretaži specijalizacije..." [(ngModel)]="pretragaSpec">&nbsp;
+          </td>
+          <td>
+            <button class="btn btn-outline-secondary" type="button" (click)="pretraga()">Pretraži</button>  
+          </td>
+        </tr>
+        <tr>
+          <th>
+            <label>Slika</label>
+          </th>
+          <th>
+            <label (click)="sortirajImena()">Ime</label>
+            <label (click)="sortirajImena()">&nbsp;^</label>
+          </th>
+          <th>
+            <label (click)="sortirajPrezimena()">Prezime</label>
+            <label (click)="sortirajPrezimena()">&nbsp;^</label>
+          </th>
+          <th>
+            <label (click)="sortirajSpec()">Specijalizacija</label>
+            <label (click)="sortirajSpec()">&nbsp;^</label>
+          </th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr  *ngFor="let i of izabrani">
+          <td>
+            <img [src]="i.slika" style="width: 80px; height: 80px;">
+          </td>
+          <td>{{i.ime}}</td>
+          <td>{{i.prezime}}</td>
+          <td>{{i.specijalizacija}}</td>
+          <td></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!--LOGIN-->
+  <!-- Modal login -->
+  <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="ModalLabel">Prijavi se</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Zatvori"></button>
+        </div>
+        <div class="modal-body justify-content-center" style="background-color: rgb(205, 176, 222);">
+          <div class="container">
+            <form>
+              <div class="row justify-content-md-center">
+                <div class="col md-6 mt-3">
+                  <label class="form-label">Korisnicko ime:</label>
+                </div>
+                <div class="col md-6 mt-3">
+                  <input type="text" class="form-control" name="korisnickoIme" [(ngModel)]="korisnickoIme">
+                </div>
+              </div>
+              <div class="row justify-content-md-center">
+                <div class="col md-6 mt-3">
+                  <label class="form-label">Lozinka:</label>
+                </div>
+                <div class="col md-6 mt-3">
+                  <input type="password" class="form-control" name="lozinka" [(ngModel)]="lozinka">
+                </div>
+              </div>
+              <div class="error">{{error+'\n'}}</div>
+              <div class="col md-3 mt-3">
+                <button type="button" class="btn btn-outline-secondary" [routerLink]="'/loginMen'" data-bs-dismiss="modal">Prijava za menadžera</button>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="modal-footer d-flex justify-content-center">
+          <button id="ZatvoriProzor" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Zatvori</button>
+          <button id="PrijaviSe" type="button" class="btn btn-primary" (click)="login()">Prijavi se</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>

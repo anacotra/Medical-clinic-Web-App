@@ -1,0 +1,68 @@
+<body style="background-color: rgb(240, 227, 243); padding-bottom: 5%;">
+    <header>
+        <!--Navigacija-->
+        <nav class="navbar navbar-light navbar-expand-sm fixed-top" style="background-color: rgba(141, 67, 158, 0.747); font-weight: bold;">
+            <div class="container-fluid">
+                <!-- Brand -->
+                <span class="navbar-brand mb-8 h3" style="color: rgb(0, 0, 0); font-size: 35px;">Menadzer</span>
+
+                <!-- Hamburger ikona za manje ekrane -->
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                <!-- Links -->
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/menadzer">Korisnici</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/specijalizacijeMen">Specijalizacije</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/vrstePregledaMen">Vrste pregleda</a>
+                    </li>
+                </ul>
+                </div>
+                <form class="d-flex">
+                    <button class="btn btn-sm btn-light" type="button" (click)="logout()" >Odjava</button>
+                </form>
+            </div>
+        </nav>
+    </header>
+    <div class="container pt-5 my-5">
+    <h4>Specijalizacije</h4>
+    <table class="table table-hover table-bordered border-dark table-striped table-sm">
+        <thead>
+            <tr>
+                <th>Naziv</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let s of specijalizacije">
+                <td>{{s.naziv}}</td>
+            </tr>
+        </tbody>
+    </table>
+    </div>
+    <div  class="container my-5" style="background-color: rgba(168, 155, 180, 0.473);">
+    <h4>Dodaj novu specijalizaciju</h4>
+    <form id="myForm">
+        <div class="row justify-content-md-center">
+            <div class="col md-6 mt-3">
+                <label class="form-label">Naziv specijalizacije:</label>
+            </div>
+            <div class="col md-6 mt-3">
+                <input type="text" id="naziv" name="naziv" [(ngModel)]="naziv">
+            </div>
+        </div>
+        <div class="row justify-content-md-center">
+            <div class="col md-6 mt-3">
+                <button class="btn btn-primary" type="button" (click)="dodaj()">Dodaj</button>
+            </div>
+        </div>
+        <br/>
+        <p class="error">{{poruka}}</p> 
+    </form>
+    </div>
+</body>

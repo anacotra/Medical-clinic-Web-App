@@ -1,0 +1,134 @@
+<body style="background-color: rgb(240, 227, 243); padding-bottom: 5%;">
+    <header>
+        <!--Navigacija-->
+        <nav class="navbar navbar-light navbar-expand-sm fixed-top" style="background-color: rgba(141, 67, 158, 0.747); font-weight: bold;">
+            <div class="container-fluid">
+                <!-- Brand -->
+                <span class="navbar-brand mb-8 h3" style="color: rgb(0, 0, 0); font-size: 35px;">Menadzer</span>
+
+                <!-- Hamburger ikona za manje ekrane -->
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                <!-- Links -->
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/menadzer">Korisnici</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/specijalizacijeMen">Specijalizacije</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/vrstePregledaMen">Vrste pregleda</a>
+                    </li>
+                </ul>
+                </div>
+                <form class="d-flex">
+                    <button class="btn btn-sm btn-light" type="button" (click)="logout()">Odjava</button>
+                </form>
+            </div>
+        </nav>
+    </header>
+    <div class="container pt-5 my-5">
+        <h4>Vrste pregleda</h4>
+        <table class="table table-hover table-bordered border-dark table-striped table-sm">
+            <thead>
+                <tr>
+                    <th>Naziv</th>
+                    <th>Specijalizacija</th>
+                    <th>Cena</th>
+                    <th>Trajanje</th>
+                    <th>Azuriraj</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let s of vrstePregleda">
+                    <td>{{s.naziv}}</td>
+                    <td>{{s.specijalizacija}}</td>
+                    <td>{{s.cena}}</td>
+                    <td>{{s.trajanje}}</td>
+                    <td>
+                        <button class="btn btn-secondary" (click)="azurirajVrste(s.naziv)">Azuriraj</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="container pt-5 my-5">
+        <h4>Zahtevi za vrste pregleda</h4>
+        <table class="table table-hover table-bordered border-dark table-striped table-sm">
+            <thead>
+                <tr>
+                    <th>Naziv</th>
+                    <th>Specijalizacija</th>
+                    <th>Cena</th>
+                    <th>Trajanje</th>
+                    <th>Odobri/odbij</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let s of zahtevi">
+                    <td>{{s.naziv}}</td>
+                    <td>{{s.specijalizacija}}</td>
+                    <td>{{s.cena}}</td>
+                    <td>{{s.trajanje}}</td>
+                    <td>
+                        <button class="btn btn-secondary" (click)="obradiZahtev(s,'odobri')">Odobri</button>&nbsp;&nbsp;
+                        <button class="btn btn-primary" (click)="obradiZahtev(s,'odbij')">Odbij</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="container my-5" style="background-color: rgba(168, 155, 180, 0.473);">
+        <h5>Dodaj novu vrstu pregleda</h5>
+        <form id="myForm">
+            <div class="row justify-content-md-center">
+                <div class="col md-6 mt-3">
+                    <label class="form-label">Naziv vrste pregleda:</label>
+                </div>
+                <div class="col md-6 mt-3">
+                    <input type="text" id="naziv" name="naziv" (change)="proveraImena()" [(ngModel)]="naziv">
+                </div>
+            </div>
+            <label class="form-label">{{nazivPoruka}}</label>
+            <div class="row justify-content-md-center">
+                <div class="col md-6 mt-3">
+                    <label class="form-label">Specijalizacija:</label>
+                </div>
+                <div class="col md-6 mt-3">
+                    <select name="spec" id="s" [(ngModel)]="specijalizacija">
+                        <option *ngFor="let o of specijalizacije" [value]="o.naziv">{{o.naziv}}</option>
+                    </select>
+                </div>
+            </div>
+            <label></label>
+            <div class="row justify-content-md-center">
+                <div class="col md-6 mt-3">
+                    <label for="date">Cena:</label>
+                </div>
+                <div class="col md-6 mt-3">
+                    <input type="number" id="cena" name="cena"  [(ngModel)]="cena">
+                </div>
+            </div>
+            <label></label>
+            <div class="row justify-content-md-center">
+                <div class="col md-6 mt-3">
+                    <label for="time">Trajanje pregleda:</label>
+                </div>
+                <div class="col md-6 mt-3">
+                    <input type="number" id="trajanje" name="trajanje" [(ngModel)]="trajanje">
+                </div>
+            </div>
+            <label></label>
+            <div class="row justify-content-md-center">
+                <div class="col md-6 mt-3">
+                    <button class="btn btn-primary" type="button" (click)="dodaj()">Dodaj</button>
+                </div>
+            </div>
+            <br/>
+            <p class="error">{{poruka}}</p> 
+        </form>
+    </div>
+</body>

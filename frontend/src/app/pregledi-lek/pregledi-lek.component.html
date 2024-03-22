@@ -1,0 +1,67 @@
+<body style="background-color: rgb(240, 227, 243); padding-bottom: 5%;">
+    <header>
+        <!--Navigacija-->
+        <nav class="navbar navbar-light navbar-expand-sm fixed-top" style="background-color: rgba(141, 67, 158, 0.747); font-weight: bold;">
+            <div class="container-fluid">
+                <!-- Brand -->
+                <span class="navbar-brand mb-8 h3" style="color: rgb(0, 0, 0); font-size: 35px;">Lekar</span>
+
+                <!-- Hamburger ikona za manje ekrane -->
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                <!-- Links -->
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/lekar">Profil</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/preglediLek">Pregledi</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/razno">Razno</a>
+                    </li>
+                </ul>
+                </div>
+                <form class="d-flex">
+                    <button class="btn btn-sm btn-light" type="button" (click)="logout()" >Odjava</button>
+                </form>
+            </div>
+        </nav>
+    </header>
+    <div class="container pt-5 my-5" id="profil">
+        <h3>Pregledi</h3>
+        <table class="table table-hover table-bordered border-dark table-striped table-sm">
+            <thead>
+                <tr>
+                    <th>Naziv pregleda</th>
+                    <th>Datum</th>
+                    <th>Vreme</th>
+                    <th>Karton pacijenta</th>
+                    <th [hidden]="!sakrij">Otkazi</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let p of pregledi.slice(0, 3)">
+                    <td>{{p.naziv}}</td>
+                    <td>{{p.datum}}</td>
+                    <td>{{p.vreme}}</td>
+                    <td>
+                        <button class="btn btn-secondary" (click)="vidikarton(p.pacijent)">Vidi karton</button>
+                    </td>
+                    <td [hidden]="!sakrij">
+                        <button class="btn btn-secondary" (click)="otkaziPregled(p.pacijent,p.datum,p.vreme)">Otkazi</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <p class="error">{{poruka}}</p>
+        <div [hidden]="sakrij">
+            <textarea name="otkazi" id="otktext" cols="30" rows="8" [(ngModel)]="objasnjenje">Razlog</textarea>&nbsp;&nbsp;
+            <br/>
+            <button class="btn btn-secondary" (click)="odustani()">Odustani</button>&nbsp;&nbsp;
+            <button class="btn btn-primary" (click)="otkazi()">Otkazi pregled</button>
+        </div>
+    </div>
+</body>

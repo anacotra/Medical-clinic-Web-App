@@ -1,0 +1,117 @@
+<body style="background-color: rgb(240, 227, 243); padding-bottom: 5%;">
+    <header>
+        <!--Navigacija-->
+        <nav class="navbar navbar-light navbar-expand-sm fixed-top" style="background-color: rgba(141, 67, 158, 0.747); font-weight: bold;">
+            <div class="container-fluid">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <span class="navbar-brand mb-8 h3" style="color: rgb(0, 0, 0); font-size: 35px;">Pacijent</span>
+                    </li>
+                </ul>
+                <form class="d-flex">
+                    <button class="btn btn-sm btn-secondary" type="button" (click)="nazad()">Nazad</button>&nbsp;&nbsp;
+                    <button class="btn btn-sm btn-light" type="button" (click)="logout()" >Odjava</button>
+                </form>
+            </div>
+        </nav>
+    </header>
+    <div class="container pt-5 my-5" id="profil">
+        <div class="container-fluid my-1">
+            <h3>Profil lekara</h3>
+        </div>
+        <div class="container border border-bottom-0 border-dark p-3">
+            <img [src]="lekar.slika" style="width: 80px; height: 80px;">
+        </div>
+        <table class="table table-hover table-bordered border-dark table-striped table-sm">
+            <tbody>
+                <tr>
+                    <td>Ime:</td>
+                    <td>{{lekar.ime}}</td>
+                </tr>
+                <tr>
+                    <td>Prezime:</td>
+                    <td>{{lekar.prezime}}</td>
+                </tr>
+                <tr>
+                    <td>Adresa:</td>
+                    <td>{{lekar.adresa}}</td> 
+                </tr>
+                <tr>
+                    <td>Telefon:</td>
+                    <td>{{lekar.telefon}}</td> 
+                </tr>
+                <tr>
+                    <td>Mejl:</td>
+                    <td>{{lekar.mejl}}</td>
+                </tr>
+                <tr>
+                    <td>Broj lekarske licence:</td>
+                    <td>{{lekar.brojLekLic}}</td>
+                </tr>
+                <tr>
+                    <td>Specijalizacija:</td>
+                    <td>{{lekar.specijalizacija}}</td>
+                </tr>
+                <tr>
+                    <td>Ogranak:</td>
+                    <td>{{lekar.ogranak}}</td>
+                </tr>
+            </tbody>
+        </table>
+        <br/>
+        <table class="table table-hover table-bordered border-dark table-striped table-sm">
+            <thead>
+                <tr>
+                    <th>Naziv</th>
+                    <th>Trajanje</th>
+                    <th>Cena</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let p of pregledi">
+                    <td>{{p.naziv}}</td>
+                    <td>{{p.trajanje}}</td>
+                    <td>{{p.cena}}</td>
+                </tr>
+            </tbody>
+        </table>
+        <button class="btn btn-dark" (click)="zakaziNoviPregled()">Zakazi novi pregled</button>&nbsp;&nbsp;
+        <div  class="container my-5"  [hidden]="sakrij" style="background-color: rgba(168, 155, 180, 0.473);">
+            <form id="myForm">
+                <div class="row justify-content-md-center">
+                    <div class="col md-6 mt-3">
+                        <label class="form-label">Vrsta pregleda:</label>
+                    </div>
+                    <div class="col md-6 mt-3">
+                        <select id="vrsta" name="naziv" [(ngModel)]="vrsta" (change)="ucitajVrstu()">
+                            <option *ngFor="let t of vrstePregleda" [value]="t">{{t}}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row justify-content-md-center">
+                    <div class="col md-6 mt-3">
+                        <label for="date">Izaberite datum:</label>
+                    </div>
+                    <div class="col md-6 mt-3">
+                        <input type="date" id="date" name="date" [(ngModel)]="ngDatum" (change)="ucitajDatum()">
+                    </div>
+                </div>
+                <div class="row justify-content-md-center">
+                    <div class="col md-6 mt-3">
+                        <label for="time">Izaberite vreme:</label>
+                    </div>
+                    <div class="col md-6 mt-3">
+                        <input type="time" id="time" name="time" [(ngModel)]="ngVreme" (change)="ucitajVreme()">
+                    </div>
+                </div>
+                <div class="row justify-content-md-center">
+                    <div class="col md-6 mt-3">
+                        <button class="btn btn-primary" type="button" (click)="zakazi()">Zakazi</button>
+                    </div>
+                </div>
+                <br/>
+                <p class="error">{{poruka}}</p> 
+            </form>
+        </div>
+    </div>
+</body>

@@ -1,0 +1,107 @@
+<body style="background-color: rgb(240, 227, 243); padding-bottom: 5%;">
+    <header>
+        <!--Navigacija-->
+        <nav class="navbar navbar-light navbar-expand-sm fixed-top" style="background-color: rgba(141, 67, 158, 0.747); font-weight: bold;">
+            <div class="container-fluid">
+                <!-- Links -->
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <span class="navbar-brand mb-8 h3" style="color: rgb(0, 0, 0); font-size: 35px;">Menadzer</span>
+                    </li>
+                </ul>
+                <form class="d-flex">
+                    <button class="btn btn-sm btn-secondary" type="button" (click)="nazad()">Nazad</button>&nbsp;&nbsp;
+                    <button class="btn btn-sm btn-light" type="button" (click)="logout()">Odjava</button>
+                </form>
+            </div>
+        </nav>
+    </header>
+<!--Profil korisnika-->
+<div class="container pt-5 my-5" id="profil">
+    <div class="container border border-bottom-0 border-dark p-3">
+        <img [src]="korisnik.slika" style="width: 80px; height: 80px;">
+        <form>
+            <input type="file" id="slika" name="slika" [(ngModel)]="ngSlika" (change)="izaberi($event)">
+            <button type="button" class="btn btn-light" (click)="promeniSliku()">Ucitaj novu sliku</button>
+        </form>  
+    </div>
+    <table class="table table-hover table-bordered border-dark table-striped table-sm">
+        <tbody>
+            <tr>
+                <td>Korisničko ime:</td>
+                <td contenteditable="true" id="ki">{{korisnik.korisnickoIme}}</td>
+            </tr>
+            <tr>
+                <td>Lozinka:</td>
+                <td contenteditable="true" id="loz">{{korisnik.lozinka}}</td>
+            </tr>
+            <tr>
+                <td>Ime:</td>
+                <td contenteditable="true" id="i">{{korisnik.ime}}</td>
+            </tr>
+            <tr>
+                <td>Prezime:</td>
+                <td contenteditable="true" id="p">{{korisnik.prezime}}</td>
+            </tr>
+            <tr>
+                <td>Adresa:</td>
+                <td contenteditable="true" id="a">{{korisnik.adresa}}</td> 
+            </tr>
+            <tr>
+                <td>Mejl:</td>
+                <td contenteditable="true" id="m">{{korisnik.mejl}}</td>
+            </tr>
+            <tr>
+                <td>Telefon:</td>
+                <td contenteditable="true" id="t">{{korisnik.telefon}}</td> 
+            </tr>
+            <tr [hidden]="korisnik.tip=='pacijent'">
+                <td>Broj licence:</td>
+                <td contenteditable="true" id="l">{{korisnik.brojLekLic}}</td>
+            </tr>
+            <tr [hidden]="korisnik.tip=='pacijent'">
+                <td>Specijalizacija:</td>
+                <td id="s">
+                    <select name="spec" id="s" [(ngModel)]="specijalizacija">
+                        <option *ngFor="let o of specijalizacije" [selected]="o.naziv === korisnik.specijalizacija" [value]="o.naziv">{{o.naziv}}</option>
+                    </select>
+                    <!--{{korisnik.specijalizacija}}-->
+                </td>
+            </tr>
+            <tr [hidden]="korisnik.tip=='pacijent'">
+                <td>Ogranak:</td>
+                <td id="o">{{korisnik.ogranak}}</td>
+            </tr>
+            <tr [hidden]="korisnik.tip=='pacijent'">
+                <td>Vrste pregleda:</td>
+                <td>
+                    <div *ngFor="let v of korisnik.vrstePregleda">
+                        {{v}}
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <div>
+        <p class="error">{{porukaSlika}} </p>
+        <p class="error">{{porukaKorIme}}</p> 
+        <p class="error">{{porukaLozinka}}</p>
+        <p class="error">{{porukaIme}}</p>
+        <p class="error">{{porukaPrezime}}</p>
+        <p class="error">{{porukaAdresa}}</p>
+        <p class="error">{{porukaMejl}}</p>
+        <p class="error">{{porukaTelefon}}</p> 
+        <p class="error">{{porukaSpecijalizacija}}</p>
+    </div>
+    <button class="btn btn-primary" (click)="azuriraj()">Azuriraj</button>
+    <div [hidden]="korisnik.tip=='pacijent'">
+        <h5>Izaberite preglede koje lekar obavlja:</h5>
+        <select multiple [(ngModel)]="listaVrsta">
+            <option *ngFor="let v of sveVrstePregleda" [value]="v.naziv">{{v.naziv}}</option>
+        </select>
+        <br/>
+        <button class="btn btn-secondary" (click)="izaberiVrste()">Izaberi</button>
+        <p class="error">{{porukaVrste}}</p>
+    </div>
+</div>
+</body>

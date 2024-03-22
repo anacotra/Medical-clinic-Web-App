@@ -1,0 +1,160 @@
+<body style="background-color: rgb(240, 227, 243); padding-bottom: 5%;">
+    <header>
+    <!--Navigacija-->
+        <nav class="navbar navbar-light navbar-expand-sm fixed-top" style="background-color: rgba(141, 67, 158, 0.747); font-weight: bold;">
+            <div class="container-fluid">
+                 <!-- Brand -->
+                 <span class="navbar-brand mb-8 h3" style="color: rgb(0, 0, 0); font-size: 35px;">Lekar</span>
+
+                 <!-- Hamburger ikona za manje ekrane -->
+                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                     <span class="navbar-toggler-icon"></span>
+                 </button>
+                 <div class="collapse navbar-collapse" id="navbarNav">
+                    <!-- Links -->
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/lekar">Profil</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/preglediLek">Pregledi</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/razno">Razno</a>
+                        </li>
+                    </ul>
+                </div>
+                <form class="d-flex navbar-right">
+                    <button class="btn btn-sm btn-secondary" type="button" data-bs-toggle="modal" data-bs-target="#promeniModal">Promeni lozinku</button>&nbsp;&nbsp;
+                    <button class="btn btn-sm btn-light" type="button" (click)="logout()" >Odjava</button>
+                </form>
+            </div>
+        </nav>
+    </header>
+
+<!-- Modal promena lozinke -->
+    <div class="modal fade" id="promeniModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Promeni lozinku</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Promeni"></button>
+        </div>
+        <div class="modal-body justify-content-center" style="background-color: rgb(205, 176, 222);">
+            <div class="container">
+                <form>
+                    <div class="row justify-content-md-center">
+                    <div class="col md-6 mt-3">
+                        <label class="form-label">Stara lozinka:</label>
+                    </div>
+                    <div class="col md-6 mt-3">
+                        <input type="password" class="form-control" name="stara" [(ngModel)]="stara">
+                    </div>
+                    </div>
+                    <div class="row justify-content-md-center">
+                    <div class="col md-6 mt-3">
+                        <label class="form-label">Nova lozinka:</label>
+                    </div>
+                    <div class="col md-6 mt-3">
+                        <input type="password" class="form-control" name="lozinka" [(ngModel)]="lozinka" (change)="proveraLozinke()">
+                    </div>
+                    </div>
+                    <div class="row justify-content-md-center">
+                        <div class="col md-6 mt-3">
+                        <label class="form-label">Ponovo nova lozinka:</label>
+                        </div>
+                        <div class="col md-6 mt-3">
+                        <input type="password" class="form-control" name="ponovo" [(ngModel)]="ponovo">
+                        </div>
+                    </div>
+                    <div class="error">{{error+'\n'}}</div>
+                </form>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" id="ZatvoriProzor" class="btn btn-secondary" data-bs-dismiss="modal">Zatvori</button>
+            <button type="button" class="btn btn-primary" (click)="promeni()">Promeni lozinku</button>
+        </div>
+        </div>
+    </div>
+    </div>
+<!--Profil korisnika-->
+    <div class="container pt-5 my-5" id="profil">
+        <div class="container border border-bottom-0 border-dark p-3">
+            <img [src]="korisnik.slika" style="width: 80px; height: 80px;">
+            <form>
+                <input type="file" id="slika" name="slika" [(ngModel)]="ngSlika" (change)="izaberi($event)">
+                <button type="button" class="btn btn-light" (click)="promeniSliku()">Ucitaj novu sliku</button>
+            </form>  
+        </div>
+        <table class="table table-hover table-bordered border-dark table-striped table-sm">
+            <tbody>
+                <tr>
+                    <td>Korisničko ime:</td>
+                    <td contenteditable="true" id="ki">{{korisnik.korisnickoIme}}</td>
+                </tr>
+                <tr>
+                    <td>Ime:</td>
+                    <td contenteditable="true" id="i">{{korisnik.ime}}</td>
+                </tr>
+                <tr>
+                    <td>Prezime:</td>
+                    <td contenteditable="true" id="p">{{korisnik.prezime}}</td>
+                </tr>
+                <tr>
+                    <td>Adresa:</td>
+                    <td contenteditable="true" id="a">{{korisnik.adresa}}</td> 
+                </tr>
+                <tr>
+                    <td>Mejl:</td>
+                    <td id="m">{{korisnik.mejl}}</td>
+                </tr>
+                <tr>
+                    <td>Telefon:</td>
+                    <td contenteditable="true" id="t">{{korisnik.telefon}}</td> 
+                </tr>
+                <tr>
+                    <td>Broj licence:</td>
+                    <td contenteditable="true" id="l">{{korisnik.brojLekLic}}</td>
+                </tr>
+                <tr>
+                    <td>Specijalizacija:</td>
+                    <td id="s">
+                        <select name="spec" id="s" [(ngModel)]="specijalizacija">
+                            <option *ngFor="let o of specijalizacije" [selected]="o.naziv === korisnik.specijalizacija" [value]="o.naziv">{{o.naziv}}</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Ogranak:</td>
+                    <td id="o">{{korisnik.ogranak}}</td>
+                </tr>
+                <tr>
+                    <td>Vrste pregleda:</td>
+                    <td>
+                        <div *ngFor="let v of korisnik.vrstePregleda">
+                            {{v}}
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div>
+            <p class="error">{{porukaSlika}} </p>
+            <p class="error">{{porukaKorIme}}</p> 
+            <p class="error">{{porukaIme}}</p>
+            <p class="error">{{porukaPrezime}}</p>
+            <p class="error">{{porukaAdresa}}</p>
+            <p class="error">{{porukaTelefon}}</p> 
+            <p class="error">{{porukaSpecijalizacija}}</p>
+        </div>
+        <button class="btn btn-primary" (click)="azuriraj()">Azuriraj</button>
+        <h5>Izaberite preglede koje zelite da obavljate:</h5>
+        <select multiple [(ngModel)]="listaVrsta">
+            <option *ngFor="let v of sveVrstePregleda" [value]="v.naziv">{{v.naziv}}</option>
+        </select>
+        <br/>
+        <button class="btn btn-secondary" (click)="izaberiVrste()">Izaberi</button>
+        <p class="error">{{porukaVrste}}</p>
+    </div>
+</body>

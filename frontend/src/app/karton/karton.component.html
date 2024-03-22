@@ -1,0 +1,116 @@
+<body style="background-color: rgb(240, 227, 243); padding-bottom: 5%;">
+    <header>
+        <!--Navigacija-->
+        <nav class="navbar navbar-light navbar-expand-sm fixed-top" style="background-color: rgba(141, 67, 158, 0.747); font-weight: bold;">
+            <div class="container-fluid">
+                <!-- Links -->
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <span class="navbar-brand mb-8 h3" style="color: rgb(0, 0, 0); font-size: 35px;">Lekar</span>
+                    </li>
+                </ul>
+                <form class="d-flex">
+                    <button class="btn btn-sm btn-secondary" type="button" (click)="nazad()">Nazad</button>&nbsp;&nbsp;
+                    <button class="btn btn-sm btn-light" type="button" (click)="logout()">Odjava</button>
+                </form>
+            </div>
+        </nav>
+    </header>
+    <div class="container pt-5 my-5">
+        <h3>Izvestaji</h3>
+        <table class="table table-hover table-bordered border-dark table-striped table-sm">
+            <thead>
+                <tr>
+                    <th>Pacijent</th>
+                    <th>Datum</th>
+                    <th>Vreme</th>
+                    <th>Lekar</th>
+                    <th>Specijalizacija</th>
+                    <th>Razlog dolaska</th>
+                    <th>Dijagnoza</th>
+                    <th>Preporucena terapija</th>
+                    <th>Preporucen datum kontrole</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let i of izvestaji">
+                    <td>{{pacijent.ime}} {{pacijent.prezime}}</td>
+                    <td>{{i.datum}}</td>
+                    <td>{{i.vreme}}</td>
+                    <td>{{i.lekarIme}} {{i.lekarPrezime}}</td>
+                    <td>{{i.lekarSpecijalizacija}}</td>
+                    <td>{{i.razlogDolaska}}</td>
+                    <td>{{i.dijagnoza}}</td>
+                    <td>{{i.preporucenaTerapija}}</td>
+                    <td>{{i.preporucenDatumKontrole}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="container pt-5 my-5">
+        <button class="btn btn-dark" (click)="napisiNoviIzvestaj()">Napisi novi izvestaj</button>&nbsp;&nbsp;
+    </div>
+    <div  class="container"  [hidden]="sakrij" style="background-color: rgba(168, 155, 180, 0.473);">
+        <form id="myForm" [hidden]="sakrij">
+            <div class="row justify-content-md-center">
+                <div class="col md-6 mt-3">
+                    <label for="date">Izaberite datum pregleda:</label>
+                </div>
+                <div class="col md-6 mt-3">
+                    <select id="datum" name="datum" [(ngModel)]="datum" (change)="datumUcitan()">
+                        <option *ngFor="let t of preglediBezIzvestaja" [value]="t.datum">{{t.datum}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row justify-content-md-center">
+                <div class="col md-6 mt-3">
+                    <label for="time">Izaberite vreme pregleda:</label>
+                </div>
+                <div class="col md-6 mt-3">
+                    <select id="vreme" name="vreme" [(ngModel)]="vreme">
+                        <option *ngFor="let t of vremenaPregleda" [value]="t">{{t}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row justify-content-md-center">
+                <div class="col md-6 mt-3">
+                    <label class="form-label">Razlog dolaska:</label>
+                </div>
+                <div class="col md-6 mt-3">
+                    <input type="text" id="razlog" name="razlog" [(ngModel)]="razlog">
+                </div>
+            </div>
+            <div class="row justify-content-md-center">
+                <div class="col md-6 mt-3">
+                    <label class="form-label">Dijagnoza:</label>
+                </div>
+                <div class="col md-6 mt-3">
+                    <input type="text" id="dijagnoza" name="dijagnoza" [(ngModel)]="dijagnoza">
+                </div>
+            </div>
+            <div class="row justify-content-md-center">
+                <div class="col md-6 mt-3">
+                    <label class="form-label">Preporucena terapija:</label>
+                </div>
+                <div class="col md-6 mt-3">
+                    <input type="text" id="terapija" name="terapija" [(ngModel)]="terapija">
+                </div>
+            </div>
+            <div class="row justify-content-md-center">
+                <div class="col md-6 mt-3">
+                    <label for="date">Preporucen datum naredne kontrole:</label>
+                </div>
+                <div class="col md-6 mt-3">
+                    <input type="date" id="datumKontr" name="datumKontr" [(ngModel)]="dat" (change)="ucitajDatum()">
+                </div>
+            </div>
+            <div class="row justify-content-md-center">
+                <div class="col md-6 mt-3">
+                    <button class="btn btn-primary" type="button" (click)="napisi()">Gotovo</button>
+                </div>
+            </div>
+            <br/>
+            <p class="error">{{poruka}}</p> 
+        </form>
+    </div>
+</body>

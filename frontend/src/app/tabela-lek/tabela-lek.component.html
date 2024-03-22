@@ -1,0 +1,99 @@
+<body style="background-color: rgb(240, 227, 243); padding-bottom: 5%;">
+    <header>
+    <!--Navigacija-->
+        <nav class="navbar navbar-light navbar-expand-sm fixed-top" style="background-color: rgba(141, 67, 158, 0.747); font-weight: bold;">
+            <div class="container-fluid">
+                 <!-- Brand -->
+                 <span class="navbar-brand mb-8 h3" style="color: rgb(0, 0, 0); font-size: 35px;">Pacijent</span>
+
+                 <!-- Hamburger ikona za manje ekrane -->
+                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                     <span class="navbar-toggler-icon"></span>
+                 </button>
+                 <div class="collapse navbar-collapse" id="navbarNav">
+                    <!-- Links -->
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/pacijent">Profil</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/tabelaLek">Lekari</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/preglediPac">Pregledi</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/obavestenjaPac">Obaveštenja</a>
+                        </li>
+                    </ul>
+                 </div>
+                <form class="d-flex">
+                    <button class="btn btn-sm btn-light" type="button" (click)="logout()" >Odjava</button>
+                </form>
+            </div>
+        </nav>
+    </header>
+    <div class="container my-5 p-3">
+        <h3>Tabela lekara</h3>
+        <table id="tabelaLekara" class="table table-hover table-striped table-sm">
+            <thead>
+                <tr>
+                <td>
+                    Pretraga lekara:
+                </td>
+                <td>
+                    <input type="text" placeholder="Pretaži imena..." [(ngModel)]="pretragaIme">&nbsp;
+                </td>
+                <td>
+                    <input type="text" placeholder="Pretaži prezimena..." [(ngModel)]="pretragaPrezime">&nbsp;
+                </td>
+                <td>
+                    <input type="text" placeholder="Pretaži specijalizacije..." [(ngModel)]="pretragaSpec">&nbsp;
+                </td>
+                <td>
+                    <input type="text" placeholder="Pretaži ogranak..." [(ngModel)]="pretragaOgr">&nbsp;
+                </td>
+                <td>
+                    <button class="btn btn-outline-secondary" type="button" (click)="pretraga()">Pretraži</button>  
+                </td>
+                </tr>
+                <tr>
+                <th>
+                    <label>Slika</label>
+                </th>
+                <th>
+                    <label (click)="sortirajImena()">Ime</label>
+                    <label (click)="sortirajImena()">&nbsp;^</label>
+                </th>
+                <th>
+                    <label (click)="sortirajPrezimena()">Prezime</label>
+                    <label (click)="sortirajPrezimena()">&nbsp;^</label>
+                </th>
+                <th>
+                    <label (click)="sortirajSpec()">Specijalizacija</label>
+                    <label (click)="sortirajSpec()">&nbsp;^</label>
+                </th>
+                <th>
+                    <label (click)="sortirajOgranak()">Ogranak</label>
+                    <label (click)="sortirajOgranak()">&nbsp;^</label>
+                </th>
+                <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr  *ngFor="let i of izabrani">
+                <td>
+                    <img [src]="i.slika" style="width: 80px; height: 80px;">
+                </td>
+                <td>{{i.ime}}</td>
+                <td>{{i.prezime}}</td>
+                <td>{{i.specijalizacija}}</td>
+                <td>{{i.ogranak}}</td>
+                <td>
+                    <button class="btn btn-outline-secondary" (click)="vidiProfil(i.korisnickoIme)">Vidi profil</button>
+                </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>

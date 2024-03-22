@@ -1,0 +1,92 @@
+<body style="background-color: rgb(240, 227, 243); padding-bottom: 5%;">
+    <header>
+        <!--Navigacija-->
+        <nav class="navbar navbar-light navbar-expand-sm fixed-top" style="background-color: rgba(141, 67, 158, 0.747); font-weight: bold;">
+            <div class="container-fluid">
+                 <!-- Brand -->
+                 <span class="navbar-brand mb-8 h3" style="color: rgb(0, 0, 0); font-size: 35px;">Pacijent</span>
+
+                 <!-- Hamburger ikona za manje ekrane -->
+                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                     <span class="navbar-toggler-icon"></span>
+                 </button>
+                 <div class="collapse navbar-collapse" id="navbarNav">
+                 <!-- Links -->
+                 <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/pacijent">Profil</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/tabelaLek">Lekari</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/preglediPac">Pregledi</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/obavestenjaPac">Obaveštenja</a>
+                    </li>
+                </ul>
+                 </div>
+                <form class="d-flex">
+                    <button class="btn btn-sm btn-light" type="button" (click)="logout()" >Odjava</button>
+                </form>
+            </div>
+        </nav>
+    </header>
+    <div class="container pt-5 my-5" id="profil">
+        <h3>Pregledi</h3>
+        <table class="table table-hover table-bordered border-dark table-striped table-sm">
+            <thead>
+                <tr>
+                    <th>Naziv pregleda</th>
+                    <th>Datum</th>
+                    <th>Vreme</th>
+                    <th>Ogranak</th>
+                    <th>Lekar</th>
+                    <th>Otkazi</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let p of pregledi">
+                    <td>{{p.naziv}}</td>
+                    <td>{{p.datum}}</td>
+                    <td>{{p.vreme}}</td>
+                    <td>{{p.ogranak}}</td>
+                    <td>{{p.imeLekara}} {{p.prezimeLekara}}</td>
+                    <td>
+                        <button class="btn btn-secondary" (click)="otkazi(p.datum,p.vreme)">Otkazi</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="container pt-5 my-5" id="profil">
+        <h3>Izvestaji</h3>
+        <table class="table table-hover table-bordered border-dark table-striped table-sm">
+            <thead>
+                <tr>
+                    <th>Datum</th>
+                    <th>Vreme</th>
+                    <th>Lekar</th>
+                    <th>Specijalizacija</th>
+                    <th>Razlog dolaska</th>
+                    <th>Dijagnoza</th>
+                    <th>Preporucena terapija</th>
+                    <th>Preporucen datum kontrole</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let i of izvestaji">
+                    <td>{{i.datum}}</td>
+                    <td>{{i.vreme}}</td>
+                    <td>{{i.lekarIme}} {{i.lekarPrezime}}</td>
+                    <td>{{i.lekarSpecijalizacija}}</td>
+                    <td>{{i.razlogDolaska}}</td>
+                    <td>{{i.dijagnoza}}</td>
+                    <td>{{i.preporucenaTerapija}}</td>
+                    <td>{{i.preporucenDatumKontrole}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>

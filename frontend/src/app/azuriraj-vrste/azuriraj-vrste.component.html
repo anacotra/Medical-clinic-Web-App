@@ -1,0 +1,50 @@
+<body style="background-color: rgb(240, 227, 243); padding-bottom: 5%;">
+    <header>
+        <!--Navigacija-->
+        <nav class="navbar navbar-light navbar-expand-sm fixed-top" style="background-color: rgba(141, 67, 158, 0.747); font-weight: bold;">
+            <div class="container-fluid">
+                <!-- Links -->
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <span class="navbar-brand mb-8 h3" style="color: rgb(0, 0, 0); font-size: 35px;">Menadzer</span>
+                    </li>
+                </ul>
+                <form class="d-flex">
+                    <button class="btn btn-sm btn-secondary" type="button" (click)="nazad()">Nazad</button>&nbsp;&nbsp;
+                    <button class="btn btn-sm btn-light" type="button" (click)="logout()">Odjava</button>
+                </form>
+            </div>
+        </nav>
+    </header>
+    <div class="container pt-5 my-5" id="profil">
+        <h4>Vrsta pregleda:</h4>
+        <table class="table table-hover table-bordered border-dark table-striped table-sm">
+            <tbody>
+                <tr>
+                    <td>Naziv:</td>
+                    <td id="n" contenteditable="true">{{vrsta.naziv}}</td>
+                </tr>
+                <tr>
+                    <td>Specijalizacija:</td>
+                    <td id="s">{{vrsta.specijalizacija}}</td>
+                </tr>
+                <tr>
+                    <td>Cena:</td>
+                    <td id="c" contenteditable="true">{{vrsta.cena}}</td> 
+                </tr>
+                <tr>
+                    <td>Trajanje:</td>
+                    <td id="t" contenteditable="true">{{vrsta.trajanje}}</td>
+                </tr>
+            </tbody>
+        </table>
+        <div>
+            <p class="error">{{porukaNaziv}} </p>
+            <p class="error">{{porukaCena}} </p>
+            <p class="error">{{porukaTrajanje}}</p> 
+        </div>
+        <div>
+            <button class="btn btn-primary" (click)="azuriraj()">Azuriraj</button>
+        </div>
+    </div>
+</body>

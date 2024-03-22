@@ -1,0 +1,123 @@
+<body style="background-color: rgb(240, 227, 243); padding-bottom: 5%;">
+    <header>
+        <!--Navigacija-->
+        <nav class="navbar navbar-light navbar-expand-sm fixed-top" style="background-color: rgba(141, 67, 158, 0.747); font-weight: bold;">
+            <div class="container-fluid">
+                <!-- Brand -->
+                <span class="navbar-brand mb-8 h3" style="color: rgb(0, 0, 0); font-size: 35px;">Lekar</span>
+
+                <!-- Hamburger ikona za manje ekrane -->
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                <!-- Links -->
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/lekar">Profil</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/preglediLek">Pregledi</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/razno">Razno</a>
+                    </li>
+                </ul>
+                </div>
+                <form class="d-flex">
+                    <button class="btn btn-sm btn-light" type="button" (click)="logout()">Odjava</button>
+                </form>
+            </div>
+        </nav>
+    </header>
+    <br/>
+    <div class="container my-5" style="background-color: rgba(168, 155, 180, 0.473);">
+        <h5>Dodaj novu vrstu pregleda</h5>
+        <form id="myForm">
+            <div class="row justify-content-md-center">
+                <div class="col md-6 mt-3">
+                    <label class="form-label">Naziv vrste pregleda:</label>
+                </div>
+                <div class="col md-6 mt-3">
+                    <input type="text" id="naziv" name="naziv" (change)="proveraImena()" [(ngModel)]="naziv">
+                </div>
+            </div>
+            <label class="form-label">{{nazivPoruka}}</label>
+            <div class="row justify-content-md-center">
+                <div class="col md-6 mt-3">
+                    <label for="date">Predlog cene:</label>
+                </div>
+                <div class="col md-6 mt-3">
+                    <input type="number" id="cena" name="cena"  [(ngModel)]="cena">
+                </div>
+            </div>
+            <label></label>
+            <div class="row justify-content-md-center">
+                <div class="col md-6 mt-3">
+                    <label for="time">Trajanje pregleda:</label>
+                </div>
+                <div class="col md-6 mt-3">
+                    <input type="number" id="trajanje" name="trajanje" [(ngModel)]="trajanje">
+                </div>
+            </div>
+            <label></label>
+            <div class="row justify-content-md-center">
+                <div class="col md-6 mt-3">
+                    <button class="btn btn-primary" type="button" (click)="dodaj()">Posalji zahtev</button>
+                </div>
+            </div>
+            <br/>
+            <p class="error">{{poruka}}</p> 
+        </form>
+    </div>
+    <div class="container my-5" style="background-color: rgba(168, 155, 180, 0.473);">
+        <h5>Slobodan dan:</h5>
+        <form id="myForm">
+            <div class="row justify-content-md-center">
+                <div class="col md-6 mt-3">
+                    <label for="date">Izaberite datum:</label>
+                </div>
+                <div class="col md-6 mt-3">
+                    <input type="date" id="datumSlobDan" name="datumSlobDan" [(ngModel)]="ngDatumSlobDan" (change)="ucitajDatumSlobDan()">
+                </div>
+            </div>
+            <label class="form-label error">{{datumSlobDanPoruka}}</label>
+            <div class="row justify-content-md-center">
+                <div class="col md-6 mt-3">
+                    <button class="btn btn-primary" type="button" (click)="slobodanDan()">Ubaci slobodan dan</button>
+                </div>
+            </div>
+            <br/>
+        </form>
+    </div>
+    <div class="container my-5" style="background-color: rgba(168, 155, 180, 0.473);">
+        <h5>Godisnji odmor:</h5>
+        <form id="myForm">
+            <div class="row justify-content-md-center">
+                <div class="col md-6 mt-3">
+                    <label for="date">Izaberite datum pocetka:</label>
+                </div>
+                <div class="col md-6 mt-3">
+                    <input type="date" id="datumGodPoc" name="datumGodPoc" [(ngModel)]="ngDatumGodPoc" (change)="ucitajDatumGodPoc()">
+                </div>
+            </div>
+            <label class="form-label error">{{datumGodPocPoruka}}</label>
+            <div class="row justify-content-md-center">
+                <div class="col md-6 mt-3">
+                    <label for="date">Izaberite datum kraja:</label>
+                </div>
+                <div class="col md-6 mt-3">
+                    <input type="date" id="datumGodKraj" name="datumGodKraj" [(ngModel)]="ngDatumGodKraj" (change)="ucitajDatumGodKraj()">
+                </div>
+            </div>
+            <label class="form-label error">{{datumGodKrajPoruka}}</label>
+            <div class="row justify-content-md-center">
+                <div class="col md-6 mt-3">
+                    <button class="btn btn-primary" type="button" (click)="godisni()">Ubaci godisnji odmor</button>
+                </div>
+            </div>
+            <label class="error">{{porukaGodisnji}}</label>
+            <br/>
+        </form>
+    </div>
+</body>

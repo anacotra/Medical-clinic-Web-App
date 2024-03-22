@@ -1,0 +1,25 @@
+/* Stilovi za manje ekrane */
+@media (max-width: 768px) {
+    .container,
+    .container-fluid,
+    .table {
+      padding: 20%;
+    }
+  }
+  
+  /* Stilovi za veće ekrane */
+  @media (min-width: 769px) {
+    .container,
+    .container-fluid,
+    .table{
+      padding: 20px;
+    }
+  }
+  body {
+    font-family: Arial, sans-serif;
+    padding: 20px;
+  }
+  
+  .error{
+    color:red;
+  }

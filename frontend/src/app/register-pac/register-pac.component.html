@@ -1,0 +1,71 @@
+<body style="background-color: rgb(240, 227, 243); padding-bottom: 5%;">
+    <!--NAVIGACIJA-->
+    <header>
+        <nav class="navbar navbar-dark navbar-expand-sm fixed-top" style="background-color: rgba(141, 67, 158, 0.747); font-weight: bold;">
+        <div class="container-fluid">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <span class="navbar-brand mb-8 h3" style="color: rgb(0, 0, 0); font-size: 35px;">Registracija pacijenta</span>
+                </li>
+            </ul>
+            <form class="d-flex">
+                <button class="btn btn-sm btn-light" type="button" (click)="nazad()">Nazad</button>
+            </form> 
+        </div>
+        </nav>
+    </header>
+    <div class="container pt-5 my-5" style="width: 600px;">
+        <div>
+            <label for="formFileLg" class="form-label">Učitaj sliku</label>
+            <input class="form-control form-control-lg" id="slika" type="file" (change)="izaberi($event)">
+            <label class="error">{{porukaSlika}}</label>
+        </div>
+        <form class="row g-3">
+            <div class="col-md-6">
+                <label class="form-label">Korisnicko ime</label>
+                <input class="form-control" type="text" required autofocus name="korisnickoIme" (change)="proveraKorIme()" [(ngModel)]="korisnickoIme">
+                <label class="error">{{porukaKorIme}}</label>
+            </div>
+            <div class="col-md-6">
+                <label class="form-label">Mejl</label>
+                <input type="email" class="form-control" name="mejl" required (change)="proveraMejl()" [(ngModel)]="mejl">
+                <label class="error">{{porukaMejl}}</label>
+            </div>
+            <div class="col-md-6">
+                <label class="form-label">Lozinka</label>
+                <input class="form-control" type="password" name="lozinka" required (change)="proveraLozinke()" [(ngModel)]="lozinka">
+                <label class="error">{{porukaLozinka}}</label>
+            </div>
+            <div class="col-md-6">
+                <label class="form-label">Lozinka potvrdi</label>
+                <input class="form-control" type="password" name="lozinkapotvrda" required (change)="proveraLozinkePot()" [(ngModel)]="lozinkapotvrda">
+                <label class="error">{{porukaLozinkaPot}}</label>
+            </div>
+            <div class="col-md-6">
+                <label class="form-label">Ime</label>
+                <input class="form-control" type="text" name="ime" required [(ngModel)]="ime">
+                <label class="error"></label>
+            </div>
+            <div class="col-md-6">
+                <label class="form-label">Prezime</label>
+                <input class="form-control" type="text" name="prezime" required [(ngModel)]="prezime">
+                <label class="error"></label>
+            </div>
+            <div class="col-md-6">
+                <label class="form-label">Adresa</label>
+                <input class="form-control" type="text" name="adresa" required [(ngModel)]="adresa">
+                <label class="error"></label>
+            </div>
+            <div class="col-md-6">
+                <label class="form-label">Telefon u formatu(+381xx/xxx/xxx(x)):</label>
+                <input class="form-control" type="text" name="telefon" required (change)="proveraTelefon()" [(ngModel)]="telefon">
+                <label class="error">{{porukaTelefon}}</label>
+            </div>
+            <div class="col-12">
+                <button type="submit" class="btn btn-primary" (click)="registracija()">Registruj se</button>
+            </div>
+        </form>
+        <p class="error">{{error}}</p>
+    </div>
+</body>
+
